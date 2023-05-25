@@ -20,7 +20,7 @@ Please execute the files in this order:
 
 3.- Crypto_generate_fake_key.py  # creates RSA asymetric keys with low entropy and ciphers messages
 
-4.- Crypto_find_gcd.py           # detects common ps
+4.- Crypto_find_gcd.py           # writes common ps in "common_factors.txt"
 
 5.- Crypto_deencryp_msg.py       # creates private kesy form public keys
 
@@ -40,11 +40,12 @@ encryption : C = pow(M,e) mod n
 decryption : M = pow(C,d) mod n
 
 From public key we con go to private key with this formula:
-d = modular inverse of (e, λ(n))
+
+> d = modular inverse of (e, λ(n))
 
 λ(n) is the Carmichael totien function.
 
-a ** k congruent with 1  (mod n)
+> a ** k congruent with 1  (mod n)
 meaning that for every **a**, smaller than **n**, and coprime with **n**, **k** is the smallest number that pow(a, k) % n = 1.
 
 d is de **modular multiplier inverse** of e and λ(n).
@@ -110,7 +111,7 @@ I timeit the algorithm with these results:
 
 
 All this you can find it in corsair.py.
-It is mathematically feasible but computationally impracticable.
+It is mathematically **feasible** but computationally **impracticable**.
 # Approach **TWO**
 ## openssl_generate_key.py & rsa_generate_key.py
 
@@ -273,7 +274,13 @@ Bash $ cat salida_encryp.txt | cut -d ',' -f5  | sed  's/q=//g' > theqs.txt
 
 ```
 # Crypto___encryp_msg.py
-4.- Ciper plaintext wiht the different 100 fake public keys in this way.
+4.- Ciper plaintext wiht the different 100 fake public keys in this way. I changed each plaintext accordint to this template:
+
+```
+thisplaintext = plaintext + f"_message_{num:0>3}"
+```
+bein num=001..099 the number of fake public key
+
 
 ```
     from Crypto.Cipher import PKCS1_OAEP
